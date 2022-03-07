@@ -1,7 +1,7 @@
 services:
   # What to call the service hosting the site.
   php:
-    image: tugboatqa/php:8-apache
+    image: tugboatqa/php:7-apache
 
     # Set this as the default service. This does a few things
     #   1. Clones the git repository into the service container
@@ -58,7 +58,7 @@ services:
         chmod -R g+w $DOCROOT/sites/default/files
 
         # Import the database.
-        cat $DOCROOT/sba-realty.sql | vendor/bin/drush sql:cli
+        vendor/bin/drush sql-cli < $DOCROOT/sba-realty.sql
 
         # Set file permissions such that Drupal will not complain.
         chgrp -R www-data "${DOCROOT}/sites/default/files"
